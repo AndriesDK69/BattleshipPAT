@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 
 public class LoginGUI extends javax.swing.JFrame {
 
+    ViewController controller = new ViewController();
+    
     /**
      * Creates new form LoginGUI
      */
@@ -22,137 +24,18 @@ public class LoginGUI extends javax.swing.JFrame {
         
     }
 
-    
+        public boolean validateGender() {
 
-    public boolean validateGender() {
-
-        boolean isValid = true;
+        boolean Valid = true;
 
         if (!(this.jRadioMale.isSelected() || this.jRadioFemale.isSelected())) {
             JOptionPane.showMessageDialog(null, "Please select suitable gender");
-            isValid = false;
+            Valid = false;
         }
 
-        return isValid;
+        return Valid;
     }
-
-    public boolean validateEmail(String email) {
-
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-
-        boolean isValid = pattern.matcher(email).matches();
-
-        if (!isValid) {
-            JOptionPane.showMessageDialog(null, "The email you have entered is not valid");
-        }
-
-        return isValid;
-    }
-
-    //Validate dob
-    public boolean validateDateOfBirth(Date date) {
-
-        boolean isValid = true;
-
-        try {
-            Calendar now = Calendar.getInstance();
-            Calendar dob = Calendar.getInstance();
-            dob.setTime(date);
-
-            int years = now.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-            if (dob.get(Calendar.DAY_OF_YEAR) > now.get(Calendar.DAY_OF_YEAR)) {
-                years--;
-            }
-
-            if (years < 12) {
-                isValid = false;
-                JOptionPane.showMessageDialog(null, "You are too young to play the game");
-            }
-
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Date is missing, please enter a date");
-        }
-
-        return isValid;
-    }
-
-    public boolean validatePhoneNumber(String phoneNumber) {
-        boolean isValid = false;
-        phoneNumber = phoneNumber.replaceAll("\\s", ""); // remove all spaces
-        if (phoneNumber.matches("^(\\+27|27|0)\\d{9}$")) {
-            isValid = true;
-            return true;
-        } else {
-
-            isValid = false;
-        }
-
-        if (!isValid) {
-            JOptionPane.showMessageDialog(null, "Your number is incorrect, please enter a correct number, make sure of the length and the country codes");
-        }
-        return isValid;
-    }
-
-    //Check if valid password
-    public boolean validatePassword(String password) {
-
-        int length = password.length();
-        boolean hasUpperCase = false;
-        boolean hasLowerCase = false;
-        boolean hasSpecialChar = false;
-
-        if (length >= 10) {
-            for (int i = 0; i < length; i++) {
-                char c = password.charAt(i);
-                if (Character.isUpperCase(c)) {
-                    hasUpperCase = true;
-                } else if (Character.isLowerCase(c)) {
-                    hasLowerCase = true;
-                } else if (!Character.isLetterOrDigit(c)) {
-                    hasSpecialChar = true;
-                }
-            }
-            return hasUpperCase && hasLowerCase && hasSpecialChar;
-
-        }
-
-        if (!(hasUpperCase && hasLowerCase && hasSpecialChar)) {
-            JOptionPane.showMessageDialog(null, "Your password is incorrect, please check spesifications, and re-enter a new password");
-        }
-
-        return false;
-    }
-
-    public boolean validateUsername(String username) {
-        boolean isValid = true;
-
-        //Validating if input is given(Presence check)
-        if (username.isEmpty()) {
-
-            JOptionPane.showMessageDialog(null, "You have not entered the username, please enter a valid username.");
-            isValid = false;
-        }
-        //Validate if Username is in suitable range (Range check)  
-        if (username.length() > 13) {
-            JOptionPane.showMessageDialog(null, "The username cannot exceed 13 characters");
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    public void checkOverallValidation(boolean username, boolean password, boolean email, boolean phoenNumber, boolean date) {
-
-        boolean isValid = this.validateUsername(this.jTextUsername.getText()) && this.validatePassword(this.jPasswordField.getText()) && this.validateDateOfBirth(this.jDateChooser2.getDate()) && this.validatePhoneNumber(this.jTextPhoneNumber.getText()) && this.validateEmail(this.jTextEmail.getText());
-
-        if (isValid) {
-
-            JOptionPane.showMessageDialog(null, "Your login was succesfull");
-
-        }
-
-    }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -206,7 +89,7 @@ public class LoginGUI extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 2380, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -225,7 +108,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jPasswordField.setBackground(new java.awt.Color(0, 153, 153));
         jPasswordField.setForeground(new java.awt.Color(255, 255, 255));
-        jPasswordField.setText("jPasswordField1");
+        jPasswordField.setText("Annas@2020123");
         jPasswordField.setBorder(null);
         jPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,12 +260,8 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void jButtonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginMouseClicked
         
-        this.validateUsername(this.jTextUsername.getText());
-        this.validatePassword(this.jPasswordField.getText());
-        this.validateDateOfBirth(this.jDateChooser2.getDate());
-        this.validatePhoneNumber(this.jTextPhoneNumber.getText());
-        this.validateEmail(this.jTextEmail.getText());
-        this.validateGender();
+        
+        controller.checkOverallValidation(controller.validateUsername(this.jTextUsername.getText()), controller.validatePassword(this.jPasswordField.getText()), controller.validateEmail(this.jTextEmail.getText()), controller.validatePhoneNumber(this.jTextPhoneNumber.getText()), controller.validateDateOfBirth(this.jDateChooser2.getDate()), this.validateGender());
 
     }//GEN-LAST:event_jButtonLoginMouseClicked
 
