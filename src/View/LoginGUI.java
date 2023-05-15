@@ -262,7 +262,7 @@ public class LoginGUI extends javax.swing.JFrame {
         
         
         controller.checkOverallValidation(controller.validateUsername(this.jTextUsername.getText()), controller.validatePassword(this.jPasswordField.getText()), controller.validateEmail(this.jTextEmail.getText()), controller.validatePhoneNumber(this.jTextPhoneNumber.getText()), controller.validateDateOfBirth(this.jDateChooser2.getDate()), this.validateGender());
-
+        controller.writeToFile(this.jTextUsername.getText(), this.jPasswordField.getText(), this.jTextPhoneNumber.getText(), this.jTextEmail.getText(), true, 14);
     }//GEN-LAST:event_jButtonLoginMouseClicked
 
     private void jTextPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPhoneNumberActionPerformed

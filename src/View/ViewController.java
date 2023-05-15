@@ -1,20 +1,20 @@
-
 package View;
 
+import Model.Player;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
-
-
 public class ViewController {
 
     public ViewController() {
-        
+
     }
-      
+
     public boolean validateEmail(String email) {
 
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
@@ -28,8 +28,8 @@ public class ViewController {
 
         return isValid;
     }
-         
-         //Validate dob
+
+    //Validate dob
     public boolean validateDateOfBirth(Date date) {
 
         boolean isValid = true;
@@ -56,7 +56,7 @@ public class ViewController {
 
         return isValid;
     }
-    
+
     public boolean validatePhoneNumber(String phoneNumber) {
         boolean isValid = false;
         phoneNumber = phoneNumber.replaceAll("\\s", ""); // remove all spaces
@@ -73,7 +73,7 @@ public class ViewController {
         }
         return isValid;
     }
-    
+
     //Check if valid password
     public boolean validatePassword(String password) {
 
@@ -103,8 +103,8 @@ public class ViewController {
 
         return false;
     }
-    
-        public boolean validateUsername(String username) {
+
+    public boolean validateUsername(String username) {
         boolean isValid = true;
 
         //Validating if input is given(Presence check)
@@ -120,23 +120,31 @@ public class ViewController {
         }
         return isValid;
     }
-        
-        public void checkOverallValidation(boolean username, boolean password, boolean email, boolean phoneNumber, boolean date, boolean gender) {
+
+    public boolean checkOverallValidation(boolean username, boolean password, boolean email, boolean phoneNumber, boolean date, boolean gender) {
 
         boolean isValid = username && password && email && phoneNumber && date && gender;
 
         if (isValid) {
 
             JOptionPane.showMessageDialog(null, "Your login was succesfull");
-
+            
         }
-
+        return isValid;
     }
+    
         
-        
-        
-        
-        
+    public void writeToFile(String username, String password, String phoneNumber, String email, boolean gender, int age) {
+    Player player = new Player(username, password, phoneNumber, email, gender, age);
+        try (FileWriter writer = new FileWriter("Players.txt")) {
+            writer.write(player.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+ 
+
     private javax.swing.JButton jButtonLogin;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;

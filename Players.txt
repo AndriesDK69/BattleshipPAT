@@ -1,0 +1,1 @@
+Player{username=Username, password=Annas@2020123, phoneNumber=071 923 9526, eMail=andriesdekock@example.com, gender=true, age=14}
