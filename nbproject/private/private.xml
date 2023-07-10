@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Model/Entity.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Model/Player.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/View/LoginGUI.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Model/Board.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Controller/UserController.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Model/Fleet.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Ships</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Model/Battleship.java</file>
-            <file>file:/Users/andriesdekock/Desktop/BattleshipPAT/src/Controller/GameController.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -22,10 +22,16 @@ public class Battleship {
   
         return true;
     }
+    
+    
 
     @Override
     public String toString() {
         return "You have picked " + ShipName + " with a size of " + shipSize;
+    }
+
+    public int getShipSize() {
+        return shipSize;
     }
         
 }

@@ -3,7 +3,7 @@ package Model;
 public class Entity {
 
     Battleship Ship;
-    boolean isOccupied;
+    private boolean isOccupied;
 
     public void setIsOccupied(boolean isOccupied) {
         this.isOccupied = isOccupied;
@@ -27,5 +27,11 @@ public class Entity {
             return "O";
         }
     }
+
+    public boolean getIsOccupied() {
+        return isOccupied;
+    }
+    
+    
 
 }

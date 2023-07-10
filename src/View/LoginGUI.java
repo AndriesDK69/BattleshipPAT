@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 import javafx.scene.control.RadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -18,6 +19,7 @@ public class LoginGUI extends javax.swing.JFrame {
      */
     public LoginGUI() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioMale);
         group.add(jRadioFemale);
@@ -231,13 +233,13 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel4, java.awt.BorderLayout.LINE_START);
@@ -260,9 +262,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
     private void jButtonLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonLoginMouseClicked
         
-        
         controller.checkOverallValidation(controller.validateUsername(this.jTextUsername.getText()), controller.validatePassword(this.jPasswordField.getText()), controller.validateEmail(this.jTextEmail.getText()), controller.validatePhoneNumber(this.jTextPhoneNumber.getText()), controller.validateDateOfBirth(this.jDateChooser2.getDate()), this.validateGender());
         controller.writeToFile(this.jTextUsername.getText(), this.jPasswordField.getText(), this.jTextPhoneNumber.getText(), this.jTextEmail.getText(), true, 14);
+        
     }//GEN-LAST:event_jButtonLoginMouseClicked
 
     private void jTextPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPhoneNumberActionPerformed

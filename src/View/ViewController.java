@@ -1,16 +1,22 @@
 package View;
 
 import Model.Player;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 public class ViewController {
 
+    int size = 1;
+    
     public ViewController() {
 
     }
@@ -29,7 +35,7 @@ public class ViewController {
         return isValid;
     }
 
-    //Validate dob
+    //Validate date of birth by checking if the age is above 12 years old
     public boolean validateDateOfBirth(Date date) {
 
         boolean isValid = true;
@@ -57,6 +63,7 @@ public class ViewController {
         return isValid;
     }
 
+    //Validate phone number by checking if valid phone codes are used, and correct length is given
     public boolean validatePhoneNumber(String phoneNumber) {
         boolean isValid = false;
         phoneNumber = phoneNumber.replaceAll("\\s", ""); // remove all spaces
@@ -74,7 +81,8 @@ public class ViewController {
         return isValid;
     }
 
-    //Check if valid password
+    //Check if valid password is entered, this method checks if password is of correct length,
+    //has enough characters, includes special characters and numbers
     public boolean validatePassword(String password) {
 
         int length = password.length();
@@ -103,7 +111,7 @@ public class ViewController {
 
         return false;
     }
-
+    //Validates the username
     public boolean validateUsername(String username) {
         boolean isValid = true;
 
@@ -127,7 +135,8 @@ public class ViewController {
 
         if (isValid) {
 
-            JOptionPane.showMessageDialog(null, "Your login was succesfull");
+            JOptionPane.showMessageDialog(null, "Your login was succesful");
+            
             
         }
         return isValid;
@@ -135,15 +144,70 @@ public class ViewController {
     
         
     public void writeToFile(String username, String password, String phoneNumber, String email, boolean gender, int age) {
-    Player player = new Player(username, password, phoneNumber, email, gender, age);
-        try (FileWriter writer = new FileWriter("Players.txt")) {
-            writer.write(player.toString());
+        Player player = new Player(username, password, phoneNumber, email, gender, age);
+        
+        try {
+            FileWriter writer = new FileWriter("Players.txt", true);
+            BufferedWriter bWriter = new BufferedWriter(writer);
+            bWriter.write("" + username + "§" + password + "§" + phoneNumber + "§" + email + "§" + age + "\n");
+            bWriter.close();
+            writer.close();
+            
+            
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error with writing to file");
         }
+    
+    }
+    
+    public Player[] playersFromTxtFileToArray() {
+        String username, password;
+        int count = 0;
+        
+        Player[] PlayersArr = new Player[1];
+        
+        try {
+            Scanner ScFile = new Scanner(new File("Players.txt"));
+            
+            while (ScFile.hasNextLine()) {
+                String next = ScFile.nextLine();
+                
+                Scanner ScLine = new Scanner(next).useDelimiter("§");
+                username = ScLine.next(); 
+                password = ScLine.next();
+                ScLine.close();
+                
+                PlayersArr[count] = new Player(username, password);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error" + e);
+        }
+        
+        
+        return PlayersArr;
     }
 
+    public boolean validateSignUp(String username, String password, Player[] PlayersArr) {
+        
+        for (int i = 0; i < PlayersArr.length; i++) {
+            if (PlayersArr[i].getUsername().equals(username) && PlayersArr[i].getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
  
+    public String printArr(Player[] PlayerArr) {
+        String temp = "";
+        
+        for (int i = 0; i < PlayerArr.length; i++) {
+            temp += PlayerArr[i].toString() + "\n";
+            
+        }
+        
+        
+        return temp;
+    }
 
     private javax.swing.JButton jButtonLogin;
     private com.toedter.calendar.JDateChooser jDateChooser2;
